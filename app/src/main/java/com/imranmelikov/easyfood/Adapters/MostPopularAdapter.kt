@@ -10,6 +10,7 @@ import com.imranmelikov.easyfood.databinding.PopularItemsBinding
 import com.imranmelikov.easyfood.pojo.CategoryMeal
 
 class MostPopularAdapter():RecyclerView.Adapter<MostPopularAdapter.MostPopularViewHolder>() {
+    lateinit var onItemClick:((CategoryMeal)->Unit)
     var mealarraylist=ArrayList<CategoryMeal>()
     fun setMeal(meallist:ArrayList<CategoryMeal>){
         this.mealarraylist=meallist
@@ -30,5 +31,9 @@ class MostPopularAdapter():RecyclerView.Adapter<MostPopularAdapter.MostPopularVi
         Glide.with(holder.itemView)
             .load(mealarraylist.get(position).strMealThumb)
             .into(holder.binding.imgPopularMeal)
+
+        holder.itemView.setOnClickListener {
+            onItemClick.invoke(mealarraylist.get(position))
+        }
     }
 }

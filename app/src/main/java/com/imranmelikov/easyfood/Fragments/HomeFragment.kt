@@ -52,6 +52,18 @@ class HomeFragment : Fragment() {
 
         homeMvvm.getPopularItems()
         observePopularItemsLiveData()
+
+        onPopularItemClick()
+    }
+
+    private fun onPopularItemClick() {
+        popularitemsadapter.onItemClick={
+            var intent=Intent(activity,MealActivity::class.java)
+            intent.putExtra(HEAD_ID,it.idMeal)
+            intent.putExtra(HEAD_NAME,it.strMeal)
+            intent.putExtra(HEAD_THUMB,it.strMealThumb)
+            startActivity(intent)
+        }
     }
 
     private fun prepearePopularItemsRecyclerview() {
@@ -62,8 +74,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun observePopularItemsLiveData() {
-        homeMvvm.observePopularItemsLiveData().observe(viewLifecycleOwner,object :Observer<CategoryMeal>{
-            override fun onChanged(value: CategoryMeal) {
+        homeMvvm.observePopularItemsLiveData().observe(viewLifecycleOwner,object :Observer<List<CategoryMeal>>{
+            override fun onChanged(value: List<CategoryMeal>) {
                 popularitemsadapter.setMeal(meallist = value as ArrayList<CategoryMeal>)
             }
 

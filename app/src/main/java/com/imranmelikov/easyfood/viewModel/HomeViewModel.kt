@@ -15,7 +15,7 @@ import retrofit2.Response
 
 class HomeViewModel(): ViewModel() {
     private val randomMealLivedata=MutableLiveData<Meal>()
-    private val popularItemsLiveData=MutableLiveData<CategoryMeal>()
+    private val popularItemsLiveData=MutableLiveData<List<CategoryMeal>>()
     fun getRandomMeal(){
         RetrofitInstance.api.getRandomMeal().enqueue(object : Callback<Meallist> {
             override fun onResponse(call: Call<Meallist>, response: Response<Meallist>) {
@@ -38,7 +38,7 @@ class HomeViewModel(): ViewModel() {
         RetrofitInstance.api.getPopularItems("Seafood").enqueue(object :Callback<CategoryList>{
             override fun onResponse(call: Call<CategoryList>, response: Response<CategoryList>) {
                 if(response.body()!=null){
-                    popularItemsLiveData.value= response.body()!!.meals[1]
+                    popularItemsLiveData.value= response.body()!!.meals
                 }
             }
 
@@ -48,7 +48,7 @@ class HomeViewModel(): ViewModel() {
 
         })
     }
-    fun observePopularItemsLiveData():LiveData<CategoryMeal>{
+    fun observePopularItemsLiveData(): MutableLiveData<List<CategoryMeal>> {
         return popularItemsLiveData
     }
 
