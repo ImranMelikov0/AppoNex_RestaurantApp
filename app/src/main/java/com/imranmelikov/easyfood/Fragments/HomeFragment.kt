@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.imranmelikov.easyfood.Activities.CategoryMealActivity
 import com.imranmelikov.easyfood.Activities.MealActivity
 import com.imranmelikov.easyfood.Adapters.CategoriesAdapter
 import com.imranmelikov.easyfood.Adapters.MostPopularAdapter
@@ -31,6 +32,7 @@ class HomeFragment : Fragment() {
         const val HEAD_ID="com.imranmelikov.easyfood.Fragments.idMeal"
         const val HEAD_NAME="com.imranmelikov.easyfood.Fragments.nameMeal"
         const val HEAD_THUMB="com.imranmelikov.easyfood.Fragments.thumbMeal"
+        const val CATEGORY_NAME="com.imranmelikov.easyfood.Fragments.categoryName"
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,7 +66,15 @@ class HomeFragment : Fragment() {
         homeMvvm.getCategories()
         observerCategoryLiveData()
 
+        onCategoryClick()
+    }
 
+    private fun onCategoryClick() {
+        categoriesadapter.onItemClick={
+            val intent=Intent(activity,CategoryMealActivity::class.java)
+            intent.putExtra(CATEGORY_NAME,it.strCategory)
+            startActivity(intent)
+        }
     }
 
     private fun prepareCategoriesRecyclerview() {

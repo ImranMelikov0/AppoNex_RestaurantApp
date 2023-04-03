@@ -17,4 +17,6 @@ interface Mealapi {
     fun getPopularItems(@Query("c")categoryName:String):Call<MealsByCategorylist>
     @GET("categories.php")
     fun getCategories():Call<CategoryList>
+    @GET("filter.php")
+    fun getMealsByCategory(@Query("c")categoryName:String):Call<MealsByCategorylist>
 }
