@@ -1,6 +1,6 @@
 package com.imranmelikov.easyfood.pojo
 
-data class CategoryMeal(
+data class MealsByCategory(
     val idMeal: String,
     val strMeal: String,
     val strMealThumb: String

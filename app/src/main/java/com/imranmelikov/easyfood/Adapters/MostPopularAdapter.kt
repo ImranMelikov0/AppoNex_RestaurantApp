@@ -3,16 +3,14 @@ package com.imranmelikov.easyfood.Adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.Recycler
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
 import com.imranmelikov.easyfood.databinding.PopularItemsBinding
-import com.imranmelikov.easyfood.pojo.CategoryMeal
+import com.imranmelikov.easyfood.pojo.MealsByCategory
 
 class MostPopularAdapter():RecyclerView.Adapter<MostPopularAdapter.MostPopularViewHolder>() {
-    lateinit var onItemClick:((CategoryMeal)->Unit)
-    var mealarraylist=ArrayList<CategoryMeal>()
-    fun setMeal(meallist:ArrayList<CategoryMeal>){
+    lateinit var onItemClick:((MealsByCategory)->Unit)
+    var mealarraylist=ArrayList<MealsByCategory>()
+    fun setMeal(meallist:ArrayList<MealsByCategory>){
         this.mealarraylist=meallist
         notifyDataSetChanged()
     }
