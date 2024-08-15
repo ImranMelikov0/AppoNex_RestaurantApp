@@ -1,12 +1,14 @@
 package com.imranmelikov.easyfood.Fragments
 
+import android.app.Fragment
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -15,12 +17,12 @@ import com.imranmelikov.easyfood.Activities.MainActivity
 import com.imranmelikov.easyfood.Activities.MealActivity
 import com.imranmelikov.easyfood.Adapters.CategoriesAdapter
 import com.imranmelikov.easyfood.Adapters.MostPopularAdapter
+import com.imranmelikov.easyfood.Fragments.BottomSheet.BottomSheetFragment
 import com.imranmelikov.easyfood.databinding.FragmentHomeBinding
 import com.imranmelikov.easyfood.pojo.MealsByCategory
 import com.imranmelikov.easyfood.pojo.Meal
 import com.imranmelikov.easyfood.viewModel.HomeViewModel
-
-class HomeFragment : Fragment() {
+class HomeFragment :androidx.fragment.app.Fragment()  {
 
     private lateinit var binding:FragmentHomeBinding
     private lateinit var viewModel:HomeViewModel
@@ -66,6 +68,23 @@ class HomeFragment : Fragment() {
         observerCategoryLiveData()
 
         onCategoryClick()
+
+        onPopulerItemLongClick()
+
+        onSearchIconClick()
+    }
+
+    private fun onSearchIconClick() {
+        binding.imgSearch.setOnClickListener {
+            findNavController().navigate(com.imranmelikov.easyfood.R.id.action_homeFragment_to_searchFragment)
+        }
+    }
+
+    private fun onPopulerItemLongClick() {
+        popularitemsadapter.onLongItemClick = {
+            val mealBottomSheetFragment=BottomSheetFragment.newInstance(it.idMeal)
+            mealBottomSheetFragment.show(childFragmentManager,"Meal Info")
+        }
     }
 
     private fun onCategoryClick() {

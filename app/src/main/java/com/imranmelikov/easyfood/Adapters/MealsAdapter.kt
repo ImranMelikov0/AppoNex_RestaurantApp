@@ -2,7 +2,6 @@ package com.imranmelikov.easyfood.Adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -10,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.imranmelikov.easyfood.databinding.MealItemBinding
 import com.imranmelikov.easyfood.pojo.Meal
 
-class FavoritesMealsAdapter:RecyclerView.Adapter<FavoritesMealsAdapter.FavoritesMealsViewHolder>() {
+class MealsAdapter:RecyclerView.Adapter<MealsAdapter.FavoritesMealsViewHolder>() {
    inner class FavoritesMealsViewHolder(var binding: MealItemBinding) :
       RecyclerView.ViewHolder(binding.root)
 
